@@ -10,6 +10,18 @@
 </ion-header>
 
 
-<ion-content padding>
-  
+<ion-content>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+  <ion-card *ngFor="let item of items">
+    <img src="{{item.foto}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{item.nome}}
+      </ion-card-title>
+      <p>
+        {{item.descricao}}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

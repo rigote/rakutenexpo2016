@@ -9,10 +9,12 @@ import {AgendaPage} from './pages/agenda/agenda';
 import {ComoChegarPage} from './pages/como-chegar/como-chegar';
 import {NotificacoesPage} from './pages/notificacoes/notificacoes';
 
+import {Fire} from './utils/fire';
 
 @Component({
   templateUrl: 'build/app.html'
 })
+
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
@@ -48,4 +50,4 @@ class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp, [Fire]);
