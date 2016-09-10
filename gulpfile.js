@@ -18,7 +18,8 @@ var paths = {
     },
     scripts: {
         src: [
-            'node_modules/materialize-css/dist/js/materialize.js'
+            'node_modules/materialize-css/dist/js/materialize.js',
+            'app/custom/js/*.js'
         ],
         dest: 'www/build/js',
         file: 'scripts-1.0.0.min.js'
@@ -70,7 +71,7 @@ gulp.task('watch', ['clean'], function(done){
 
 gulp.task('build', ['clean'], function(done){
   runSequence(
-    ['images', 'sass', 'html', 'fonts', 'scripts'],
+    ['images', 'sass', 'html', 'fonts', 'scripts', 'script', 'css'],
     function(){
       buildBrowserify({
         minify: isRelease,
