@@ -36,6 +36,7 @@ export class PalestrantesPage {
       result.push({
         key: item,
         nome: this.data[item].nome,
+        ocupacao: this.data[item].ocupacao,
         descricao: this.data[item].descricao,
         foto: this.data[item].foto
       });        
@@ -51,7 +52,8 @@ export class PalestrantesPage {
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
         return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1) || 
-                  (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                  (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+                    (item.ocupacao.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
