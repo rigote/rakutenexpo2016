@@ -1,0 +1,40 @@
+//Header
+ion-navbar.toolbar{
+    ion-title{
+        text-align: center;
+    }
+    i{
+        color: #FFF;
+        font-size: 31px;
+        position: absolute;
+        top: 15%;
+        &.info{
+            left: 5%;
+        }
+        &.search {
+            right: 5%;
+        }
+    }
+}
+
+//Página de palestrantes
+ion-searchbar{
+    display: none;
+    .searchbar-input-container{
+        .searchbar-search-icon{
+            top: 8px;
+            left: 0px;
+            width: 30px;
+            height: 30px;
+            background-size: 30px;
+        }
+        input[type=search]{
+            margin-bottom: 0px;
+            padding-left: 31px;
+            width: 91%;
+            &:focus{
+                border-bottom: 1px solid #069;
+            }
+        }
+    }    
+}
