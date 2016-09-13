@@ -5,31 +5,18 @@ declare var firebase: any;
 @Injectable()
 export class Fire {
 
-    private config: any;
-    private _trilhas: any;
-    private _palestrantes: any;
-    private _palestras: any;
-    private _agendamentos: any;
+    private _trilhas: any = null;
+    private _palestrantes: any = null;
+    private _palestras: any = null;
+    private _agendamentos: any = null;
+    private _patrocinadores: any = null;
 
     constructor() {
-        this.config = {
-            apiKey: "AIzaSyB6Eaac9Vgs0HO1QcT7XLkghceapTYYcXI",
-            authDomain: "rakuten-expo-2016.firebaseapp.com",
-            databaseURL: "https://rakuten-expo-2016.firebaseio.com",
-            storageBucket: "rakuten-expo-2016.appspot.com",
-        };
-
-        firebase.initializeApp(this.config);
-
-        /*firebase.auth().signInAnonymously().catch(function(error) {
-            console.log(error.code);
-            console.log(error.message);
-        });*/
-
         this._trilhas = firebase.database().ref('/data/trilhas');
         this._palestrantes = firebase.database().ref('/data/palestrantes');
         this._palestras = firebase.database().ref('/data/palestras');
-        //this._agendamentos = firebase.database().ref('/data/agendamentos');
+        this._agendamentos = firebase.database().ref('/data/agendamentos');
+        this._patrocinadores = firebase.database().ref('/data/patrocinadores');
     }
 
     public getPalestrante(id: any): any {
@@ -79,6 +66,14 @@ export class Fire {
     }
 
     public getAllAgendamentos(): any {
+        return this._agendamentos;
+    }
+
+    public getPatrocinador(id: any): any {
+        return this._agendamentos.child(id);
+    }
+
+    public getAllPatrocinadores(): any {
         return this._agendamentos;
     }
 
