@@ -11,8 +11,10 @@ import {NotificacoesPage} from './pages/notificacoes/notificacoes';
 
 import {Fire} from './utils/fire';
 
+declare var firebase: any;
+
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
 })
 
 class MyApp {
@@ -24,6 +26,19 @@ class MyApp {
 
   constructor(public platform: Platform) {
     this.initializeApp();
+
+    firebase.initializeApp({
+            apiKey: "AIzaSyB6Eaac9Vgs0HO1QcT7XLkghceapTYYcXI",
+            authDomain: "rakuten-expo-2016.firebaseapp.com",
+            databaseURL: "https://rakuten-expo-2016.firebaseio.com",
+            storageBucket: "rakuten-expo-2016.appspot.com",
+        });
+
+    /*firebase.auth().signInAnonymously().catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+    });*/
+
     this.rootPage = TabsPage;
 
     // used for an example of ngFor and navigation
@@ -37,12 +52,12 @@ class MyApp {
 
   }
 
-  initializeApp() {
+  initializeApp() {    
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-    });
+    });    
   }
 
   openPage(page) {
