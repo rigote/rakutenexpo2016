@@ -38,3 +38,95 @@ ion-searchbar{
         }
     }    
 }
+
+.row.guias{
+    .col{
+        padding: 0;
+        .tabs{
+            li.tab{
+                &.marketing{
+                    background-color: #E91E63;
+                }
+                &.inovacao{
+                    background-color: #7986CB;
+                }
+                &.varejo{
+                    background-color: #00ACC1;
+                }
+                &.gestao{
+                    background-color: #FFA726;
+                }
+                a{
+                    font-size: 12px;
+                    color: #FFF;
+                }
+                :hover{
+                    color: #FFF;
+                }
+            }
+            .indicator{
+                background-color: #eaeaea;
+            }
+        }
+    }
+}
+
+.card{
+    display: inline-block;
+    width: 100%;
+     .card-image{
+         float: left;
+         img{
+             width: 130px !important;
+             height: 160px !important;
+             background-color: #ccc;
+             margin-right: 5px;
+         }
+    }
+    .card-content{
+        padding: 19px 5px !important;
+        .card-title{
+            font-size: 18px !important;
+            width: 67%;
+            line-height: inherit !important;
+            .nomePalestrante, .ocupacaoPalestrante{
+                display: block;
+                margin: 0px;
+            }
+            .nomePalestrante{
+                font-weight: bold;
+                color: #333;
+            }
+            .ocupacaoPalestrante{
+                font-size: 16px;
+            }
+        }
+        .infoPalestrante{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border-top: 1px solid #eaeaea;
+            width: 69%;
+            padding: 4px 5px 0;
+            text-align: right;
+            i.small{
+                font-size: 24px;
+                color: #999;
+            }
+            span {
+                color: #999;
+                font-size: 17px;
+                vertical-align: top;
+                padding: 4px 10px;
+                border-right: 1px dashed;
+            }
+        }
+        
+    }
+    .card-reveal{
+        p{
+            font-size: 14px;
+            margin: 0;
+        }
+    }
+}

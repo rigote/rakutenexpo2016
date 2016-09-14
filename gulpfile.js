@@ -23,6 +23,12 @@ var paths = {
         ],
         dest: 'www/build/js',
         file: 'scripts-1.0.0.min.js'
+    },
+    fonts: {
+        src: [
+          'node_modules/materialize-css/fonts/roboto/**/*.+(eot|ttf|woff|woff2|svg)'
+        ],
+        dest: "www/build/fonts"
     }
 };
 

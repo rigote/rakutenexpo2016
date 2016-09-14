@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import * as $ from "jquery";
 
 import {Fire} from '../../utils/fire';
 
@@ -57,5 +58,12 @@ export class PalestrantesPage {
       })
     }
   }
-  
+
+  ionViewLoaded() {
+      //Habilita ou desabilita busca palestrantes e agenda
+      $("#iconSearch").click(function(){
+          $("ion-searchbar").toggle(300);
+      });
+  }
+
 }
