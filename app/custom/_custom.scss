@@ -17,6 +17,37 @@ ion-navbar.toolbar{
     }
 }
 
+//Página Home
+.home{
+    .content,.row.box{
+        border-bottom: 1px solid #CCC;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        .dados{
+            float: left;
+            width: 45%;
+            &:first-child{
+                border-right: 1px solid #ccc;
+                margin-right: 15px;
+            }
+            ul li{
+                font-size: 14px;
+                i{
+                    vertical-align: bottom;
+                }
+            }
+        }
+    }
+    p{
+        font-size: 14px;
+        text-align: justify;
+        text-justify: inter-word;
+    }
+    .destaque{
+        text-align: center;
+    }
+}
+
 //Página de palestrantes
 ion-searchbar{
     display: none;
@@ -127,6 +158,78 @@ ion-searchbar{
         p{
             font-size: 14px;
             margin: 0;
+        }
+    }
+}
+
+//Página Minha Agenda
+
+
+//Página Como Chegar
+.como-chegar{
+    .local{
+        border-bottom: 1px dashed #999;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        h3{
+            font-size: 26px;
+            color: #333;
+            margin: 0 0 5px;
+            text-align: center;
+        }
+        .map {
+            position: relative;
+            padding-bottom: 75%; // This is the aspect ratio
+            height: 0;
+            overflow: hidden;
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                height: 100% !important;
+            }
+        }
+    }
+    .hoteis{
+        h3{
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin: 10px 0 5px 0;
+        }
+        .row.box{
+            border: 1px solid #eaeaea;
+            padding: 5px;
+            max-width: 80%;
+            text-align: center;
+            img{
+                display: inline-block;
+            }
+            span{
+                display: inline-block;
+                color: #333;
+            }
+            p{
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+//Patrocinadores
+.patrocinadores{
+    .row.box{
+        text-align: center;
+        h3 {
+            color: #999;
+            font-size: 24px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed #999;
+            padding-bottom: 8px;
+        }
+        img {
+            width: 40%;
         }
     }
 }
