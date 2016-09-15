@@ -151,11 +151,13 @@ export class AgendaPage {
     
     let result: Array<any> = [];
     
-    for (let i: number = 0; i < palestranteIDs.length; i++) {
-      for (let j: number = 0; j < this.itemsPalestrante.length; j++) {
-        if (palestranteIDs[i] == this.itemsPalestrante[j].key) {
-          result.push(this.itemsPalestrante[j]);
-          break;
+    if (typeof palestranteIDs != 'undefined') {
+      for (let i: number = 0; i < palestranteIDs.length; i++) {
+        for (let j: number = 0; j < this.itemsPalestrante.length; j++) {
+          if (palestranteIDs[i] == this.itemsPalestrante[j].key) {
+            result.push(this.itemsPalestrante[j]);
+            break;
+          }
         }
       }
     }

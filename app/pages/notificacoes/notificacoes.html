@@ -10,28 +10,24 @@
 
 <ion-content padding>
   <div class="patrocinadores">
-    <div class="row box">
+    <div class="row box" ng-show="getSponsorsByType('Diamond').length > 0">
       <h3>Diamond</h3>
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/diamond/logo_diamond1.png" alt="">
+      <img *ngFor="let item of getSponsorsByType('Diamond')" src="{{item.logo}}" alt="{{item.nome}}" />
     </div>
 
-    <div class="row box">
+    <div class="row box" ng-show="getSponsorsByType('Gold').length > 0">
       <h3>Gold</h3>
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold1.png" alt="">
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold2.png" alt="">
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold3.png" alt="">
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold4.png" alt="">
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold5.png" alt="">
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold6.png" alt="">
-      <img src="http://rakuten.com.br/Expo/assets/img/patrocinadores2016/gold/logo_gold7.png" alt="">
+      <img *ngFor="let item of getSponsorsByType('Gold')" src="{{item.logo}}" alt="{{item.nome}}" />
     </div>
 
-    <div class="row box">
+    <div class="row box" ng-show="getSponsorsByType('Silver').length > 0">
       <h3>Silver</h3>
+      <img *ngFor="let item of getSponsorsByType('Silver')" src="{{item.logo}}" alt="{{item.nome}}" />
     </div>
 
-    <div class="row box">
+    <div class="row box" ng-show="getSponsorsByType('Bronze').length > 0">
       <h3>Bronze</h3>
+      <img *ngFor="let item of getSponsorsByType('Bronze')" src="{{item.logo}}" alt="{{item.nome}}" />
     </div>
   </div>
 </ion-content>

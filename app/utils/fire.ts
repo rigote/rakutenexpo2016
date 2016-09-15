@@ -10,6 +10,7 @@ export class Fire {
     private _palestras: any = null;
     private _agendamentos: any = null;
     private _patrocinadores: any = null;
+    private _informacoes: any = null;
 
     constructor() {
         this._trilhas = firebase.database().ref('/data/trilhas');
@@ -17,6 +18,7 @@ export class Fire {
         this._palestras = firebase.database().ref('/data/palestras');
         this._agendamentos = firebase.database().ref('/data/agendamentos');
         this._patrocinadores = firebase.database().ref('/data/patrocinadores');
+        this._informacoes = firebase.database().ref('/data/informacoes');
     }
 
     public getPalestrante(id: any): any {
@@ -70,11 +72,19 @@ export class Fire {
     }
 
     public getPatrocinador(id: any): any {
-        return this._agendamentos.child(id);
+        return this._patrocinadores.child(id);
     }
 
     public getAllPatrocinadores(): any {
-        return this._agendamentos;
+        return this._patrocinadores;
+    }
+
+    public getInformacao(id: any): any {
+        return this._informacoes.child(id);
+    }
+
+    public getAllInformacoes(): any {
+        return this._informacoes;
     }
 
 }
