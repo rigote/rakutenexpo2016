@@ -5,6 +5,8 @@ import * as $ from "jquery";
 
 import {Fire} from '../../utils/fire';
 
+declare var tabsFunction: any;
+
 /*
   Generated class for the PalestrantesPage page.
 
@@ -27,21 +29,32 @@ export class PalestrantesPage {
 
   constructor(private navCtrl: NavController, private fire: Fire) {
     var root = this;
+
+    tabsFunction.createTabs('ul.tabs');
+
     this._fire = fire;
 
-    this._fire.getAllPalestrantes().on('value', (data) => {
-      root.data = data.val();
-      root.initializeItems(1);
-    });
+    this._fire.connection.on("value", function(snap) { 
+      debugger;     
+        if (snap.val() === true) {
+          root._fire.getAllPalestrantes().on('value', (data) => {
+            root.data = data.val();
+            root.initializeItems(1);
+          });
 
-    this._fire.getAllPalestras().on('value', (data) => {
-      root.dataPalestra = data.val();
-      root.initializeItems(2);
-    });
+          root._fire.getAllPalestras().on('value', (data) => {
+            root.dataPalestra = data.val();
+            root.initializeItems(2);
+          });
 
-    this._fire.getAllTrilhas().on('value', (data) => {
-      root.dataTrilha = data.val();
-      root.initializeItems(3);
+          root._fire.getAllTrilhas().on('value', (data) => {
+            root.dataTrilha = data.val();
+            root.initializeItems(3);
+          });
+        }
+        else {
+            console.log("Dispositivo offline");
+        }
     });
   }
 
@@ -77,12 +90,13 @@ export class PalestrantesPage {
 
         this.itemsPalestra = result;
         break;
-        case 3:
+      case 3:
         for (var item in this.dataTrilha) {        
           result.push({
             key: item,
             canal: this.dataTrilha[item].canal,
             nome: this.dataTrilha[item].nome,
+            alias: this.dataTrilha[item].alias
           });        
         }
 
@@ -140,6 +154,32 @@ export class PalestrantesPage {
     }
 
     return result;
+  }
+
+  public getPalestrantes(trilhaID: any): Array<any> {
+    let palestrantes: Array<any> = [];
+    let result: Array<any> = [];
+
+    for(let i: number = 0; i < this.itemsPalestra.length; i++) {
+      if (this.itemsPalestra[i].trilhaID == trilhaID) {
+        for (let j: number = 0; j < this.itemsPalestra[i].palestranteIDs; j++) {
+          if (palestrantes.indexOf(this.itemsPalestra[i].palestranteIDs[j]) == -1) {
+            palestrantes.push(this.itemsPalestra[i].palestranteIDs[j]);
+          }
+        }        
+      }
+    }
+
+    for(let i: number = 0; i < this.items.length; i++) {
+      for (let j: number = 0; j < palestrantes.length; j++) {
+        if (this.items[i].key == palestrantes[j]) {
+          result.push(this.items[i]);
+          break;
+        }
+      }      
+    }
+
+    return result;    
   }
 
   ionViewLoaded() {

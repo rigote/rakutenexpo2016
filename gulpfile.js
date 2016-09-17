@@ -18,8 +18,11 @@ var paths = {
     },
     scripts: {
         src: [
+            'app/custom/js/vendor/jquery-2.1.1.min.js',
+            'app/custom/js/vendor/firebase.js',
             'node_modules/materialize-css/dist/js/materialize.js',
-            'app/custom/js/*.js'
+            'app/custom/js/funcoes.js',
+            'app/custom/js/onesignal.config.js'
         ],
         dest: 'www/build/js',
         file: 'scripts-1.0.0.min.js'

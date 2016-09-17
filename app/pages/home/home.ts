@@ -21,10 +21,18 @@ export class HomePage {
     var root = this;
     this._fire = fire;
 
-    this._fire.getInformacao("-KReft9hR7LoM-KkR3xg").on('value', (data) => {
-      root.data = data.val();
-      root.initializeItems();
+    this._fire.connection.on("value", function(snap) {
+        if (snap.val() === true) {
+            root._fire.getInformacao("-KReft9hR7LoM-KkR3xg").on('value', (data) => {
+              root.data = data.val();
+              root.initializeItems();
+            });
+        }
+        else {
+            console.log("Dispositivo offline");
+        }
     });
+      
   }
 
   private initializeItems() {

@@ -5,20 +5,24 @@ declare var firebase: any;
 @Injectable()
 export class Fire {
 
-    private _trilhas: any = null;
-    private _palestrantes: any = null;
-    private _palestras: any = null;
-    private _agendamentos: any = null;
-    private _patrocinadores: any = null;
-    private _informacoes: any = null;
+    private _trilhas: any;
+    private _palestrantes: any;
+    private _palestras: any;
+    private _agendamentos: any;
+    private _patrocinadores: any;
+    private _informacoes: any;
+    public connection: any;
 
     constructor() {
+        var root = this;
+
         this._trilhas = firebase.database().ref('/data/trilhas');
         this._palestrantes = firebase.database().ref('/data/palestrantes');
         this._palestras = firebase.database().ref('/data/palestras');
         this._agendamentos = firebase.database().ref('/data/agendamentos');
         this._patrocinadores = firebase.database().ref('/data/patrocinadores');
         this._informacoes = firebase.database().ref('/data/informacoes');
+        this.connection = firebase.database().ref('/.info/connected');
     }
 
     public getPalestrante(id: any): any {

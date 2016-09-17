@@ -15,24 +15,20 @@
   <div class="row guias">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s3 marketing"><a class="active" href="#test1">Marketing</a></li>
-        <li class="tab col s3 inovacao"><a href="#test2">Inovação</a></li>
-        <li class="tab col s3 varejo"><a href="#test3">Varejo</a></li>
-        <li class="tab col s3 gestao"><a href="#test4">Gestão de Lojas</a></li>
+        <li class="tab col s3 {{trilha.alias}}" *ngFor="let trilha of itemsTrilha"><a class="active" href="#{{trilha.alias}}">{{trilha.nome}}</a></li>
       </ul>
     </div>
-    <div id="test1" class="col s12">
-      <div class="card" *ngFor="let item of items">
+    <div id="{{trilha.alias}}" class="col s12" *ngFor="let trilha of itemsTrilha">
+      <div class="card" *ngFor="let item of getPalestrantes(trilha.key)">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="{{item.foto}}">
-          <!--<img src="http://www.mayasservice.co/img/testimonial/testi-7.jpg" alt="">-->
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">
-        <span class="nomePalestrante">{{item.nome}}</span>
+          <span class="nomePalestrante">{{item.nome}}</span>
           <span class="ocupacaoPalestrante">{{item.ocupacao}}</span>
           <span class="ocupacaoPalestrante">{{item.palestra}}</span>
-          <i class="material-icons right">more_vert</i>
+            <i class="material-icons right">more_vert</i>
           </span>
           <div class="infoPalestrante">
             <span><i class="small material-icons">query_builder</i> {{getLectureTime(item.key)}}</span>
@@ -41,8 +37,7 @@
           </div>
         </div>
         <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">
-        <i class="material-icons right">close</i></span>
+          <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
           <p>{{item.descricao}}</p>
         </div>
       </div>
