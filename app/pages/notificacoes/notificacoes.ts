@@ -23,7 +23,7 @@ export class NotificacoesPage {
     var root = this;
     this._fire = fire;
 
-    this._fire.getAllPatrocinadores().on('value', (data) => {
+    this._fire.getAllPatrocinadores().once('value', (data) => {
       root.data = data.val();
       root.initializeItems();
     });
