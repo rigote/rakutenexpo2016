@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Device} from 'ionic-native';
 import * as $ from "jquery";
@@ -22,20 +22,21 @@ export class PalestrantesPage {
   public items: any = [];
   public itemsPalestra: any = [];
   public itemsTrilha: any = [];
+  public itemsAgendamento: any = [];
   public data: any;
   public dataPalestra: any;
   public dataTrilha: any;
+  public dataAgendamento: any;
   public _fire: Fire;
+  private _uuID: any;
 
   constructor(private navCtrl: NavController, private fire: Fire) {
-    var root = this;
-
-    tabsFunction.createTabs('ul.tabs');
+    var root = this;    
 
     this._fire = fire;
+    this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
 
     this._fire.connection.on("value", function(snap) { 
-      debugger;     
         if (snap.val() === true) {
           root._fire.getAllPalestrantes().on('value', (data) => {
             root.data = data.val();
@@ -51,6 +52,12 @@ export class PalestrantesPage {
             root.dataTrilha = data.val();
             root.initializeItems(3);
           });
+
+          root._fire.getAgendamentoByUUID(root._uuID).on('value', (data) => {
+            root.dataAgendamento = data.val();
+            root.initializeItems(4);
+          });
+          
         }
         else {
             console.log("Dispositivo offline");
@@ -83,8 +90,7 @@ export class PalestrantesPage {
             descricao: this.dataPalestra[item].descricao,
             horario: this.dataPalestra[item].horario,
             trilhaID: this.dataPalestra[item].trilhaID,
-            palestranteIDs: this.dataPalestra[item].palestranteIDs,
-            agendado: false
+            palestranteIDs: this.dataPalestra[item].palestranteIDs
           });        
         }
 
@@ -101,6 +107,19 @@ export class PalestrantesPage {
         }
 
         this.itemsTrilha = result;
+        tabsFunction.createTabs('ul.tabs');
+
+        break;
+      case 4:
+        for (var item in this.dataAgendamento) {        
+          result.push({
+            key: item,
+            deviceID: this.dataAgendamento[item].deviceID,
+            palestraID: this.dataAgendamento[item].palestraID
+          });        
+        }
+
+        this.itemsAgendamento = result;
         break;
     }
     
@@ -122,7 +141,39 @@ export class PalestrantesPage {
   }
 
   public toggleLecture(item: any) {
-    console.log(Device.device.uuid);
+
+    let palestraIDs: Array<any> = [];
+
+    for (var i in this.itemsPalestra) {  
+      if (typeof this.itemsPalestra[i].palestranteIDs != 'undefined' && this.itemsPalestra[i].palestranteIDs.indexOf(item.key) > -1) {
+        for (var j in this.itemsPalestra[i].palestranteIDs) {
+          palestraIDs.push(this.itemsPalestra[i].palestranteIDs[j]);
+        }        
+      }
+    }
+
+    let scheduled: boolean = false;
+    let key: any;
+
+    for (var i in this.itemsAgendamento) {
+      if (this.itemsAgendamento[i].deviceID == this._uuID && this.itemsAgendamento[i].palestraID == palestraIDs[0]) {
+        scheduled = true;
+        key = this.itemsAgendamento[i].key;
+        break;
+      }
+    }
+
+    if (scheduled) {
+      this._fire.removeAgendamento(key);
+    }
+    else {
+      this._fire.addAgendamento({
+        deviceID: this._uuID,
+        palestraID: palestraIDs[0]
+      });
+    }
+    
+
   }
 
   public getLectureTime(key): any {
@@ -138,6 +189,19 @@ export class PalestrantesPage {
     return result;
   }
 
+  public getLecture(key): any {
+    let result: string = "";
+
+    for (var item in this.itemsPalestra) {  
+      if (typeof this.itemsPalestra[item].palestranteIDs != 'undefined' && this.itemsPalestra[item].palestranteIDs.indexOf(key) > -1) {
+        result = this.itemsPalestra[item].titulo;
+        break;
+      }
+    }
+
+    return result;
+  }
+
   public getChannel(key): any {
     let result: string = "";
 
@@ -145,7 +209,7 @@ export class PalestrantesPage {
       if (typeof this.itemsPalestra[item].palestranteIDs != 'undefined' && this.itemsPalestra[item].palestranteIDs.indexOf(key) > -1) {
         for (var itemTrilha in this.itemsTrilha) {
           if (this.itemsTrilha[itemTrilha].key == this.itemsPalestra[item].trilhaID) {
-            result = this.itemsPalestra[item].canal;
+            result = this.itemsTrilha[itemTrilha].canal;
             break;
           }            
         }        
@@ -162,7 +226,7 @@ export class PalestrantesPage {
 
     for(let i: number = 0; i < this.itemsPalestra.length; i++) {
       if (this.itemsPalestra[i].trilhaID == trilhaID) {
-        for (let j: number = 0; j < this.itemsPalestra[i].palestranteIDs; j++) {
+        for (let j: number = 0; j < this.itemsPalestra[i].palestranteIDs.length; j++) {
           if (palestrantes.indexOf(this.itemsPalestra[i].palestranteIDs[j]) == -1) {
             palestrantes.push(this.itemsPalestra[i].palestranteIDs[j]);
           }
@@ -178,15 +242,41 @@ export class PalestrantesPage {
         }
       }      
     }
-
     return result;    
   }
 
-  ionViewLoaded() {
-      //Habilita ou desabilita busca palestrantes e agenda
-      $("#iconSearch").click(function(){
-          $("ion-searchbar").toggle(300);
-      });
+  public isScheduled(item) {
+    let result: boolean = false;
+    let palestraIDs: Array<any> = [];
+
+    for (var i in this.itemsPalestra) {  
+      if (typeof this.itemsPalestra[i].palestranteIDs != 'undefined' && this.itemsPalestra[i].palestranteIDs.indexOf(item.key) > -1) {
+        for (var j in this.itemsPalestra[i].palestranteIDs) {
+          palestraIDs.push(this.itemsPalestra[i].palestranteIDs[j]);
+        }        
+      }
+    }
+
+    for (let i: number = 0; i < this.itemsAgendamento.length; i++) {
+      if (palestraIDs.indexOf(this.itemsAgendamento[i].palestraID) > -1 && this._uuID) {
+        result = true;
+        break;
+      }
+    }
+    
+    
+    return result;
+  }
+
+  public hide(alias) {
+    tabsFunction.hide(alias);
+  }
+
+  ionViewLoaded() {    
+    //Habilita ou desabilita busca palestrantes e agenda
+    $("#iconSearch").click(function(){
+        $("ion-searchbar").toggle(300);
+    });
   }
 
 }

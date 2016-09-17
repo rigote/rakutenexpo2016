@@ -27,7 +27,7 @@ export class AgendaPage {
     var root = this;
     this._fire = fire;
 
-    this._fire.getAllPalestras().on('value', (data) => {
+    this._fire.getAllPalestras().orderByChild('index').on('value', (data) => {
       root.dataPalestra = data.val();
       root.initializeItems(1);
     });

@@ -4,7 +4,13 @@ $("#iconSearch").click(function(){
 });
 
 var tabsFunction = {
-    createTabs: function (selector) {
-        $(selector).tabs();
+    createTabs: function (selector, tab) {
+        if (typeof tab != 'undefined')
+            $(selector).tabs(tab);
+        else
+            $(selector).tabs();
+    }, 
+    hide: function (selector) {
+        $('div.tabContent[id!="' + selector + '"]').hide(0);
     }
 };

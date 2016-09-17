@@ -15,10 +15,12 @@
   <div class="row guias">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s3 {{trilha.alias}}" *ngFor="let trilha of itemsTrilha"><a class="active" href="#{{trilha.alias}}">{{trilha.nome}}</a></li>
+        <li class="tab col s3 {{trilha.alias}}" *ngFor="let trilha of itemsTrilha; let last = last; let i = index">
+          <a [ngClass]="{'active': i == 0}" (click)="hide(trilha.alias)" href="#{{trilha.alias}}">{{trilha.nome}}</a>          
+        </li>
       </ul>
     </div>
-    <div id="{{trilha.alias}}" class="col s12" *ngFor="let trilha of itemsTrilha">
+    <div id="{{trilha.alias}}" class="col s12 tabContent" *ngFor="let trilha of itemsTrilha; let last = last; let i = index">
       <div class="card" *ngFor="let item of getPalestrantes(trilha.key)">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="{{item.foto}}">
@@ -27,13 +29,13 @@
           <span class="card-title activator grey-text text-darken-4">
           <span class="nomePalestrante">{{item.nome}}</span>
           <span class="ocupacaoPalestrante">{{item.ocupacao}}</span>
-          <span class="ocupacaoPalestrante">{{item.palestra}}</span>
+          <!--<span class="ocupacaoPalestrante">{{getLecture(item.key)}}</span>-->
             <i class="material-icons right">more_vert</i>
           </span>
           <div class="infoPalestrante">
             <span><i class="small material-icons">query_builder</i> {{getLectureTime(item.key)}}</span>
             <span><i class="small material-icons">radio</i> {{getChannel(item.key)}}</span>
-            <i class="small material-icons" [ngClass]="{'icon-yellow': true}" (click)="toggleLecture(item)">star</i>
+            <i class="small material-icons" [ngClass]="{'active': isScheduled(item)}" (click)="toggleLecture(item)">star</i>
           </div>
         </div>
         <div class="card-reveal">
@@ -41,6 +43,6 @@
           <p>{{item.descricao}}</p>
         </div>
       </div>
-    </div>
+    </div>    
   </div>
 </ion-content>

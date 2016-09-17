@@ -42,11 +42,11 @@ export class Fire {
     }
 
     public getTrilha(id: any): any {
-        return this._palestras.child(id);
+        return this._trilhas.child(id);
     }
 
     public getAllTrilhas(): any {
-        return this._palestras;
+        return this._trilhas;
     }
 
     public addAgendamento(item: any) {
@@ -69,6 +69,10 @@ export class Fire {
 
     public getAgendamento(id: any): any {
         return this._agendamentos.child(id);
+    }
+
+    public getAgendamentoByUUID(uuID: any): any {
+        return this._agendamentos.orderByChild('deviceID').equalTo(uuID);
     }
 
     public getAllAgendamentos(): any {
