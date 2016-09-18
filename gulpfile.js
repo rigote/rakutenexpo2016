@@ -18,6 +18,7 @@ var paths = {
     },
     scripts: {
         src: [
+            'app/custom/js/vendor/underscore.js',
             'app/custom/js/vendor/jquery-2.1.1.min.js',
             'app/custom/js/vendor/firebase.js',
             'node_modules/materialize-css/dist/js/materialize.js',

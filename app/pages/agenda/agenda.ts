@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Storage, LocalStorage } from 'ionic-angular';
 
 import {Fire} from '../../utils/fire';
+
+declare var _: any;
 
 /*
   Generated class for the AgendaPage page.
@@ -27,7 +29,12 @@ export class AgendaPage {
     var root = this;
     this._fire = fire;
 
-    this._fire.getAllPalestras().orderByChild('index').on('value', (data) => {
+    //var storage = new Storage(LocalStorage);
+    //this.itemsPalestra = storage.get('palestras') != null ? storage.get('palestras') : [];
+    //this.itemsTrilha = storage.get('trilhas') != null ? storage.get('trilhas') : [];
+    //this.itemsPalestrante = storage.get('palestrantes') != null ? storage.get('palestrantes') : [];
+
+    this._fire.getAllPalestras().on('value', (data) => {
       root.dataPalestra = data.val();
       root.initializeItems(1);
     });
@@ -45,12 +52,14 @@ export class AgendaPage {
 
   private initializeItems(type: number) {
     var result = [];
-
+    //var storage = new Storage(LocalStorage);
+    
     switch (type) {
       case 1:
         for (var item in this.dataPalestra) {        
           result.push({
             key: item,
+            index: this.dataPalestra[item].index,
             titulo: this.dataPalestra[item].titulo,
             descricao: this.dataPalestra[item].descricao,
             horario: this.dataPalestra[item].horario,
@@ -60,7 +69,8 @@ export class AgendaPage {
           });        
         }
 
-        this.itemsPalestra = result;
+        //storage.set('palestras', result);
+        this.itemsPalestra = _.sortBy(result, function(obj){ return Math.min(obj.index); });
       break;
       case 2:
         for (var item in this.dataPalestrante) {        
@@ -73,6 +83,7 @@ export class AgendaPage {
           });        
         }
 
+        //storage.set('palestrantes', result);
         this.itemsPalestrante = result;
       break;
       case 3:
@@ -84,6 +95,7 @@ export class AgendaPage {
           });        
         }
 
+        //storage.set('trilhas', result);
         this.itemsTrilha = result;
       break;
     }    

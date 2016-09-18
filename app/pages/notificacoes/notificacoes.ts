@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Storage, LocalStorage } from 'ionic-angular';
 
 import {Fire} from '../../utils/fire';
 
@@ -19,9 +19,17 @@ export class NotificacoesPage {
   public data: any;
   public _fire: Fire;
 
+  public _gold: Array<any>;
+  public _silver: Array<any>;
+  public _bronze: Array<any>;
+  public _diamond: Array<any>;
+
   constructor(private navCtrl: NavController, private fire: Fire) {
     var root = this;
     this._fire = fire;
+
+    //var storage = new Storage(LocalStorage);
+    //this.items = storage.get('patrocinadores') != null ? storage.get('patrocinadores') : [];
 
     this._fire.getAllPatrocinadores().once('value', (data) => {
       root.data = data.val();
@@ -41,7 +49,15 @@ export class NotificacoesPage {
       });        
     }
 
+    //var storage = new Storage(LocalStorage);
+    //storage.set('patrocinadores', result);
+
     this.items = result;
+
+    this._gold = this.getSponsorsByType('Gold');
+    this._silver = this.getSponsorsByType('Silver');
+    this. _bronze = this.getSponsorsByType('Bronze');
+    this._diamond = this.getSponsorsByType('Diamond');
   }
 
   public getSponsorsByType(type: string): Array<any> {

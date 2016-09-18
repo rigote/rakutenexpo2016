@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Storage, LocalStorage } from 'ionic-angular';
 
 import {Fire} from '../../utils/fire';
 
@@ -21,6 +21,9 @@ export class HomePage {
     var root = this;
     this._fire = fire;
 
+    //var storage = new Storage(LocalStorage);
+    //this.item = storage.get('home') != null ? storage.get('home') : this.item;
+
     this._fire.connection.on("value", function(snap) {
         if (snap.val() === true) {
             root._fire.getInformacao("-KReft9hR7LoM-KkR3xg").on('value', (data) => {
@@ -36,6 +39,9 @@ export class HomePage {
   }
 
   private initializeItems() {
+    //var storage = new Storage(LocalStorage);
+    //storage.set('home', this.data);
+
     this.item = this.data;
   }
 

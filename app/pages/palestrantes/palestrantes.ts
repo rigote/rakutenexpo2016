@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Storage, LocalStorage } from 'ionic-angular';
 import {Device} from 'ionic-native';
 import * as $ from "jquery";
 
@@ -36,6 +36,12 @@ export class PalestrantesPage {
     this._fire = fire;
     this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
 
+    //var storage = new Storage(LocalStorage);
+    //this.items = storage.get('palestrantes') != null ? storage.get('palestrantes') : [];
+    //this.itemsPalestra = storage.get('palestras') != null ? storage.get('palestras') : [];
+    //this.itemsTrilha = storage.get('trilhas') != null ? storage.get('trilhas') : [];
+    //this.itemsAgendamento = storage.get('agendamentos') != null ? storage.get('agendamentos') : [];
+
     this._fire.connection.on("value", function(snap) { 
         if (snap.val() === true) {
           root._fire.getAllPalestrantes().on('value', (data) => {
@@ -67,7 +73,8 @@ export class PalestrantesPage {
 
   private initializeItems(type: number) {
     var result = [];
-
+    //var storage = new Storage(LocalStorage);
+    
     switch (type) {
       case 1:
         for (var item in this.data) {        
@@ -80,6 +87,7 @@ export class PalestrantesPage {
           });        
         }
 
+        //storage.set('palestrantes', result);
         this.items = result;
         break;
       case 2:
@@ -94,6 +102,7 @@ export class PalestrantesPage {
           });        
         }
 
+        //storage.set('palestras', result);
         this.itemsPalestra = result;
         break;
       case 3:
@@ -106,6 +115,7 @@ export class PalestrantesPage {
           });        
         }
 
+        //storage.set('trilhas', result);
         this.itemsTrilha = result;
         tabsFunction.createTabs('ul.tabs');
 
@@ -119,6 +129,7 @@ export class PalestrantesPage {
           });        
         }
 
+        //storage.set('agendamentos', result);
         this.itemsAgendamento = result;
         break;
     }

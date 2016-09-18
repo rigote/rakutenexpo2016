@@ -38,7 +38,7 @@ export class Fire {
     }
 
     public getAllPalestras(): any {
-        return this._palestras;
+        return this._palestras.orderByKey();
     }
 
     public getTrilha(id: any): any {
