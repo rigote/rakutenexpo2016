@@ -2,6 +2,11 @@
 ion-navbar.toolbar{
     ion-title{
         text-align: center;
+        img{
+            position: absolute;
+            left: 5%;
+            bottom: 15%;
+        }
     }
     i{
         color: #FFF;
@@ -13,6 +18,9 @@ ion-navbar.toolbar{
         }
         &.search {
             right: 5%;
+        }
+        &.star{
+            right: 15%;
         }
     }
 }
@@ -76,16 +84,16 @@ ion-searchbar{
         .tabs{
             li.tab{
                 &.marketing{
-                    background-color: #E91E63;
+                    background-color: color($colors, marketing);
                 }
                 &.inovacao{
-                    background-color: #7986CB;
+                    background-color: color($colors, inovacao);
                 }
                 &.varejo{
-                    background-color: #00ACC1;
+                    background-color: color($colors, varejo);
                 }
                 &.gestao{
-                    background-color: #FFA726;
+                    background-color: color($colors, solucao);
                 }
                 a{
                     font-size: 12px;
@@ -163,7 +171,68 @@ ion-searchbar{
 }
 
 //Página Minha Agenda
-
+.agendaLista{
+    ul{
+        li{
+            border-bottom: 1px solid #CCC;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            display: inline-block;
+            width: 100%;
+            h3{
+                font-size: 19.6px;
+                float: left;
+                margin: 0;
+                padding: 0;
+                line-height: 24px;
+                color: #000;
+                font-weight: normal;
+                width: 100%;
+                i{  
+                    float: left;
+                    margin-right: 5px;
+                }
+            }
+            img{
+                max-width: 80%;
+            }
+            .chip{
+                height: auto;
+                border-radius: 42px;
+                background-color: #FFF;
+                color: #000;
+                font-size: 16px;
+                font-weight: normal;
+                position: relative;
+                width: 100%;
+                margin-top: 2px;
+                border: 2px solid;
+                &.marketing{border-color: color($colors, marketing);}
+                &.inovacao{border-color: color($colors, inovacao);}
+                &.varejo{border-color: color($colors, varejo);}
+                &.solucao{border-color: color($colors, solucao);}
+                img{
+                    width: 80px;
+                    height: 80px;
+                }
+                span{
+                    font-size: 16.5px;
+                    color: #000;
+                    display: block;
+                    &.canal{
+                        position: absolute;
+                        top: 30%;
+                        right: 5%;
+                    }
+                    i{
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
 
 //Página Como Chegar
 .como-chegar{
@@ -235,7 +304,7 @@ ion-searchbar{
 }
 
 .card .card-content .infoPalestrante i.small.material-icons.active {
-    color: #bb0000;
+    color: #FFD600;
 }
 
 .tabContent.off {

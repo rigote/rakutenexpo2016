@@ -2,21 +2,56 @@
 
   <ion-navbar rakuten>
     <ion-title>Agenda
-    <i class="material-icons info" id="iconInfo">info_outline</i></ion-title>
+      <img src="build/img/logo-rakuten.png" alt="">
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list *ngFor="let item of getTimeList()">
-    <ion-list-header>
-      {{item}}
-    </ion-list-header>
-    <ion-item *ngFor="let data of getLecturesByTime(item)">
-      <h2>{{data.titulo}}</h2>
-      <h3>{{getPalestrantesLabel(data.palestrantes)}}</h3>
-      <p>{{data.descricao}}</p>
-    </ion-item>    
-  </ion-list>
+
+  <div class="agendaLista">
+    <ul>
+      <li>
+        <h3><i class="material-icons">query_builder</i> 8:00 Abertura</h3>
+        <img src="https://firebasestorage.googleapis.com/v0/b/rakuten-expo-2016.appspot.com/o/Palestrantes%2Fapp_rene.jpg?alt=media&token=a18d3224-9af7-4fb2-b22a-e83d2a1c1002"
+          alt="">
+      </li>
+      <li>
+        <h3><i class="material-icons">query_builder</i> 8:00 Abertura</h3>
+        <img src="https://firebasestorage.googleapis.com/v0/b/rakuten-expo-2016.appspot.com/o/Palestrantes%2Fapp_amorim.jpg?alt=media&token=10b7b48e-7c64-482f-b02b-2f809427bf3d"
+          alt=""></li>
+      <li>
+        <h3><i class="material-icons">query_builder</i> 8:00 Abertura</h3>
+        <div class="chip marketing">
+          <img src="https://firebasestorage.googleapis.com/v0/b/rakuten-expo-2016.appspot.com/o/Palestrantes%2F01.jpg?alt=media&token=8b1f7bb6-1dbe-4a5a-ba35-0f1e9cb80c57" alt="Contact Person">
+          <span>Nome Palestrante</span>
+          <span class="canal"><i class="small material-icons">radio</i> 01</span>
+          <span>Tema palestra</span>
+        </div>
+
+        <div class="chip inovacao">
+          <img src="https://firebasestorage.googleapis.com/v0/b/rakuten-expo-2016.appspot.com/o/Palestrantes%2FFoto_Perfil.jpg?alt=media&token=d5f446dd-bae0-44a9-8378-9f2ef506c8d9" alt="Contact Person">
+          <span>Nome Palestrante</span>
+          <span class="canal"><i class="small material-icons">radio</i> 01</span>
+          <span>Tema palestra</span>
+        </div>
+
+        <div class="chip varejo">
+          <img src="https://firebasestorage.googleapis.com/v0/b/rakuten-expo-2016.appspot.com/o/Palestrantes%2F03.jpg?alt=media&token=96c87489-3544-4a55-982c-eeaf5022a8d6" alt="Contact Person">
+          <span>Nome Palestrante</span>
+          <span class="canal"><i class="small material-icons">radio</i> 01</span>
+          <span>Tema palestra</span>
+        </div>
+
+        <div class="chip solucao">
+          <img src="http://materializecss.com/images/yuna.jpg" alt="Contact Person">
+          <span>Nome Palestrante</span>
+          <span class="canal"><i class="small material-icons">radio</i> 01</span>
+          <span>Tema palestra</span>
+        </div>
+      </li>
+    </ul>
+  </div>
 </ion-content>
