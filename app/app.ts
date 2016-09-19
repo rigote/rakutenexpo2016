@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
+import { ionicBootstrap, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import {TabsPage} from './pages/tabs/tabs';
@@ -18,8 +18,6 @@ declare var firebase: any;
 })
 
 class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
@@ -61,7 +59,7 @@ class MyApp {
   }
 
   openPage(page) {
-    this.nav.setRoot(page.component);
+    
   }
 }
 
