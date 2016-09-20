@@ -124,7 +124,7 @@ ion-searchbar{
                     background-color: color($colors, varejo);
                 }
                 &.gestao{
-                    background-color: color($colors, solucao);
+                    background-color: color($colors, gestao);
                 }
                 a{
                     font-size: 12px;
@@ -231,7 +231,6 @@ ion-searchbar{
             }
             .chip{
                 height: auto;
-                border-radius: 42px;
                 background-color: #FFF;
                 color: #000;
                 font-size: 16px;
@@ -239,33 +238,50 @@ ion-searchbar{
                 position: relative;
                 width: 100%;
                 margin-top: 2px;
-                border: 2px solid;
-                &.marketing{border-color: color($colors, marketing);}
-                &.inovacao{border-color: color($colors, inovacao);}
-                &.varejo{border-color: color($colors, varejo);}
-                &.solucao{border-color: color($colors, solucao);}
                 img{
-                    width: 80px;
-                    height: 80px;
+                    width: 100px;
+                    height: 130px;
+                    border-radius: 0;
                 }
                 span{
                     font-size: 16.5px;
                     color: #000;
                     display: block;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    &.tituloPalestrante{
+                        width: 55%;
+                        font-size: 14px;
+                    }
                     &.canal{
                         position: absolute;
                         top: 30%;
-                        right: 5%;
+                        right: 0;
                     }
                     i{
                         font-size: 22px;
                     }
                 }
                 .badge{
-                    &.marketing{border-color: color($colors, marketing);}
-                    &.inovacao{border-color: color($colors, inovacao);}
-                    &.varejo{border-color: color($colors, varejo);}
-                    &.solucao{border-color: color($colors, solucao);}
+                    top: 0;
+                    right: 0;
+                    font-size: 12px;
+                    margin: 0;
+                    padding: 5px;
+                    line-height: 18px;
+                    color: #FFF;
+                    text-transform: uppercase;
+                    &.marketing{background-color: color($colors, marketing);}
+                    &.inovacao{background-color: color($colors, inovacao);}
+                    &.varejo{background-color: color($colors, varejo);}
+                    &.gestao{background-color: color($colors, gestao);}
+                }
+            }
+            .genesis{
+                text-align: center;
+                h3{
+                    text-align: left;
                 }
             }
         }

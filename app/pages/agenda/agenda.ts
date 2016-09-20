@@ -195,22 +195,21 @@ export class AgendaPage {
     return foto;
   }
 
-  public getCanalTrilha(trilhaID: any): string {
+  public getTrilhaData(trilhaID: any, type: number): string {
     for (var index in this.itemsTrilha) {
-      if (this.itemsTrilha[index].key == trilhaID)
-        return this.itemsTrilha[index].canal;
+      if (this.itemsTrilha[index].key == trilhaID) {
+        switch (type) {
+          case 1: //canal
+            return this.itemsTrilha[index].canal;
+          case 2: //alias
+            return this.itemsTrilha[index].alias;
+          case 3: //nome
+            return this.itemsTrilha[index].nome;
+        }
+      }        
     }
-
+    
     return '';
-  }
-
-  public getAliasTrilha(trilhaID: any): string {
-    for (var index in this.itemsTrilha) {
-      if (this.itemsTrilha[index].key == trilhaID)
-        return this.itemsTrilha[index].alias;
-    }
-
-    return '';
-  }
+  }  
 
 }
