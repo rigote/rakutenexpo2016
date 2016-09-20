@@ -23,6 +23,7 @@ export class NotificacoesPage {
   public _silver: Array<any>;
   public _bronze: Array<any>;
   public _diamond: Array<any>;
+  public _apoio: Array<any>;
   public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
@@ -59,6 +60,7 @@ export class NotificacoesPage {
     this._silver = this.getSponsorsByType('Silver');
     this. _bronze = this.getSponsorsByType('Bronze');
     this._diamond = this.getSponsorsByType('Diamond');
+    this._apoio = this.getSponsorsByType('Apoio');
   }
 
   public getSponsorsByType(type: string): Array<any> {

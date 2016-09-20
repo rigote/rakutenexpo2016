@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
     del = require('del'),
     runSequence = require('run-sequence'),
+    fonts = require('gulp-task-fonts'),
     argv = process.argv;
 var cssmin = require('gulp-cssmin');
 var uglify = require('gulp-uglify');
@@ -28,10 +29,15 @@ var paths = {
         dest: 'www/build/js',
         file: 'scripts-1.0.0.min.js'
     },
-    fonts: {
+    fontes: {
         src: [
-          'node_modules/materialize-css/fonts/roboto/**/*.+(eot|ttf|woff|woff2|svg)',
-          'app/fonts/**/*.+(eot|ttf|woff|woff2|svg)'
+          'node_modules/materialize-css/fonts/roboto/**/*'
+        ],
+        dest: "www/build/fonts/roboto"
+    },
+    fontes1: {
+        src: [          
+          'app/fonts/**/*'
         ],
         dest: "www/build/fonts"
     }
@@ -120,6 +126,18 @@ gulp.task('script', function() {
         .pipe(gulp.dest(paths.scripts.dest))
 });
 
+gulp.task('fontes', function() {
+    return gulp
+        .src(paths.fontes.src)
+        .pipe(gulp.dest(paths.fontes.dest))
+});
+
+gulp.task('fontes1', function() {
+    return gulp
+        .src(paths.fontes1.src)
+        .pipe(gulp.dest(paths.fontes1.dest))
+});
+
 gulp.task('sass', buildSass);
 gulp.task('html', copyHTML);
 gulp.task('fonts', copyFonts);
@@ -128,4 +146,4 @@ gulp.task('clean', function(){
   return del('www/build');
 });
 gulp.task('lint', tslint);
-gulp.task('default', ['script', 'css', 'fonts']);
+gulp.task('default', ['script', 'css', 'fontes', 'fontes1']);

@@ -30,5 +30,10 @@
       <h3>Bronze</h3>
       <img *ngFor="let item of _bronze" src="{{item.logo}}" alt="{{item.nome}}" />
     </div>
+
+    <div class="row box" ng-show="_apoio.length > 0">
+      <h3>Apoio</h3>
+      <img *ngFor="let item of _apoio" src="{{item.logo}}" alt="{{item.nome}}" />
+    </div>
   </div>
 </ion-content>

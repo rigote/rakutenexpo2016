@@ -55,32 +55,24 @@ export class PalestrantesPage {
       root.itemsAgendamento = JSON.parse(value);
     });
 
-    this._fire.connection.on("value", function(snap) { 
-        if (snap.val() === true) {
-          root._fire.getAllPalestrantes().on('value', (data) => {
-            root.data = data.val();
-            root.initializeItems(1);
-          });
+    this._fire.getAllPalestrantes().once('value', (data) => {
+      root.data = data.val();
+      root.initializeItems(1);
+    });
 
-          root._fire.getAllPalestras().on('value', (data) => {
-            root.dataPalestra = data.val();
-            root.initializeItems(2);
-          });
+    this._fire.getAllPalestras().once('value', (data) => {
+      root.dataPalestra = data.val();
+      root.initializeItems(2);
+    });
 
-          root._fire.getAllTrilhas().on('value', (data) => {
-            root.dataTrilha = data.val();
-            root.initializeItems(3);
-          });
+    this._fire.getAllTrilhas().once('value', (data) => {
+      root.dataTrilha = data.val();
+      root.initializeItems(3);
+    });
 
-          root._fire.getAgendamentoByUUID(root._uuID).on('value', (data) => {
-            root.dataAgendamento = data.val();
-            root.initializeItems(4);
-          });
-          
-        }
-        else {
-            console.log("Dispositivo offline");
-        }
+    this._fire.getAgendamentoByUUID(root._uuID).once('value', (data) => {
+      root.dataAgendamento = data.val();
+      root.initializeItems(4);
     });
   }
 
@@ -116,7 +108,7 @@ export class PalestrantesPage {
         }
 
         this.storage.setJson('palestras', result);
-        this.itemsPalestra = result;
+        this.itemsPalestra = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         break;
       case 3:
         for (var item in this.dataTrilha) {        
