@@ -30,7 +30,8 @@ var paths = {
     },
     fonts: {
         src: [
-          'node_modules/materialize-css/fonts/roboto/**/*.+(eot|ttf|woff|woff2|svg)'
+          'node_modules/materialize-css/fonts/roboto/**/*.+(eot|ttf|woff|woff2|svg)',
+          'app/fonts/**/*.+(eot|ttf|woff|woff2|svg)'
         ],
         dest: "www/build/fonts"
     }
@@ -127,4 +128,4 @@ gulp.task('clean', function(){
   return del('www/build');
 });
 gulp.task('lint', tslint);
-gulp.task('default', ['script', 'css']);
+gulp.task('default', ['script', 'css', 'fonts']);
