@@ -24,15 +24,23 @@ export class AgendaPage {
   public itemsPalestrante: any = [];
   public dataPalestrante: any;
   public _fire: Fire;
+  public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
     var root = this;
     this._fire = fire;
 
-    //var storage = new Storage(LocalStorage);
-    //this.itemsPalestra = storage.get('palestras') != null ? storage.get('palestras') : [];
-    //this.itemsTrilha = storage.get('trilhas') != null ? storage.get('trilhas') : [];
-    //this.itemsPalestrante = storage.get('palestrantes') != null ? storage.get('palestrantes') : [];
+    this.storage.get('palestras').then((value) => {
+      root.itemsPalestra = JSON.parse(value);
+    });
+    
+    this.storage.get('trilhas').then((value) => {
+      root.itemsTrilha = JSON.parse(value);
+    });
+
+    this.storage.get('palestrantes').then((value) => {
+      root.itemsPalestrante = JSON.parse(value);
+    });
 
     this._fire.getAllPalestras().on('value', (data) => {
       root.dataPalestra = data.val();
@@ -52,7 +60,6 @@ export class AgendaPage {
 
   private initializeItems(type: number) {
     var result = [];
-    //var storage = new Storage(LocalStorage);
     
     switch (type) {
       case 1:
@@ -69,7 +76,7 @@ export class AgendaPage {
           });        
         }
 
-        //storage.set('palestras', result);
+        this.storage.setJson('palestras', result);
         this.itemsPalestra = _.sortBy(result, function(obj){ return Math.min(obj.index); });
       break;
       case 2:
@@ -83,7 +90,7 @@ export class AgendaPage {
           });        
         }
 
-        //storage.set('palestrantes', result);
+        this.storage.setJson('palestrantes', result);
         this.itemsPalestrante = result;
       break;
       case 3:
@@ -91,11 +98,12 @@ export class AgendaPage {
           result.push({
             key: item,
             canal: this.dataTrilha[item].canal,
-            nome: this.dataTrilha[item].nome
+            nome: this.dataTrilha[item].nome,
+            alias: this.dataTrilha[item].alias
           });        
         }
 
-        //storage.set('trilhas', result);
+        this.storage.setJson('trilhas', result);
         this.itemsTrilha = result;
       break;
     }    
@@ -136,7 +144,8 @@ export class AgendaPage {
             horario: this.itemsPalestra[i].horario,
             titulo: this.itemsPalestra[i].titulo,
             descricao: this.itemsPalestra[i].descricao,
-            palestrantes: this.getPalestrantes(this.itemsPalestra[i].palestranteIDs)
+            palestrantes: this.getPalestrantes(this.itemsPalestra[i].palestranteIDs),
+            trilhaID: this.itemsPalestra[i].trilhaID
           });
         }
     }
@@ -176,6 +185,33 @@ export class AgendaPage {
 
     return result;
 
+  }
+
+  public getFotoPalestrantes(palestrantes: Array<any>): string {
+    let foto: string = '';
+
+    if (palestrantes.length > 0)
+      foto = typeof palestrantes[0].foto != 'undefined' ? palestrantes[0].foto : foto;
+
+    return foto;
+  }
+
+  public getCanalTrilha(trilhaID: any): string {
+    for (var index in this.itemsTrilha) {
+      if (this.itemsTrilha[index].key == trilhaID)
+        return this.itemsTrilha[index].canal;
+    }
+
+    return '';
+  }
+
+  public getAliasTrilha(trilhaID: any): string {
+    for (var index in this.itemsTrilha) {
+      if (this.itemsTrilha[index].key == trilhaID)
+        return this.itemsTrilha[index].alias;
+    }
+
+    return '';
   }
 
 }

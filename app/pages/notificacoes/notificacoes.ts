@@ -23,13 +23,15 @@ export class NotificacoesPage {
   public _silver: Array<any>;
   public _bronze: Array<any>;
   public _diamond: Array<any>;
+  public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
     var root = this;
     this._fire = fire;
 
-    //var storage = new Storage(LocalStorage);
-    //this.items = storage.get('patrocinadores') != null ? storage.get('patrocinadores') : [];
+    this.storage.get('patrocinadores').then((value) => {
+      root.items = JSON.parse(value);
+    });
 
     this._fire.getAllPatrocinadores().once('value', (data) => {
       root.data = data.val();
@@ -49,8 +51,7 @@ export class NotificacoesPage {
       });        
     }
 
-    //var storage = new Storage(LocalStorage);
-    //storage.set('patrocinadores', result);
+    this.storage.setJson('patrocinadores', result);
 
     this.items = result;
 

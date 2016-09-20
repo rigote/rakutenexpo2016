@@ -13,7 +13,23 @@
 
   <div class="agendaLista">
     <ul>
-      <li>
+      <li *ngFor="let item of getTimeList()">        
+        <div *ngFor="let data of getLecturesByTime(item); let index = index">
+          <h3 *ngIf="data.trilhaID != '' && index == 0"><i class="material-icons">query_builder</i> {{item}}</h3>
+          <div class="chip {{getAliasTrilha(data.trilhaID)}}" *ngIf="data.trilhaID != ''">
+            <img [src]="getFotoPalestrantes(data.palestrantes)" alt="Contact Person">
+            <span>{{getPalestrantesLabel(data.palestrantes)}}</span>
+            <span class="canal"><i class="small material-icons">radio</i> {{getCanalTrilha(data.trilhaID)}}</span>
+            <span>{{data.titulo}}</span>
+          </div>
+          <div *ngIf="data.trilhaID == ''">
+            <h3><i class="material-icons">query_builder</i> {{item}} {{data.titulo}}</h3>
+            <img [src]="getFotoPalestrantes(data.palestrantes)" *ngIf="getFotoPalestrantes(data.palestrantes) != ''" alt="">
+          </div>
+        </div>
+      </li>
+
+      <!--<li>
         <h3><i class="material-icons">query_builder</i> 8:00 Abertura</h3>
         <img src="https://firebasestorage.googleapis.com/v0/b/rakuten-expo-2016.appspot.com/o/Palestrantes%2Fapp_rene.jpg?alt=media&token=a18d3224-9af7-4fb2-b22a-e83d2a1c1002"
           alt="">
@@ -51,7 +67,7 @@
           <span class="canal"><i class="small material-icons">radio</i> 01</span>
           <span>Tema palestra</span>
         </div>
-      </li>
+      </li>-->
     </ul>
   </div>
 </ion-content>

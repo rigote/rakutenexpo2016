@@ -6,6 +6,7 @@ import * as $ from "jquery";
 import {Fire} from '../../utils/fire';
 
 declare var tabsFunction: any;
+declare var _: any;
 
 /*
   Generated class for the PalestrantesPage page.
@@ -29,6 +30,8 @@ export class PalestrantesPage {
   public dataAgendamento: any;
   public _fire: Fire;
   private _uuID: any;
+  public favoriteFilterSelected: boolean = false;
+  public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
     var root = this;    
@@ -36,11 +39,21 @@ export class PalestrantesPage {
     this._fire = fire;
     this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
 
-    //var storage = new Storage(LocalStorage);
-    //this.items = storage.get('palestrantes') != null ? storage.get('palestrantes') : [];
-    //this.itemsPalestra = storage.get('palestras') != null ? storage.get('palestras') : [];
-    //this.itemsTrilha = storage.get('trilhas') != null ? storage.get('trilhas') : [];
-    //this.itemsAgendamento = storage.get('agendamentos') != null ? storage.get('agendamentos') : [];
+    this.storage.get('palestrantes').then((value) => {
+      root.items = JSON.parse(value);
+    });
+
+    this.storage.get('palestras').then((value) => {
+      root.itemsPalestra = JSON.parse(value);
+    });
+
+    this.storage.get('trilhas').then((value) => {
+      root.itemsTrilha = JSON.parse(value);
+    });
+
+    this.storage.get('agendamentos').then((value) => {
+      root.itemsAgendamento = JSON.parse(value);
+    });
 
     this._fire.connection.on("value", function(snap) { 
         if (snap.val() === true) {
@@ -73,7 +86,6 @@ export class PalestrantesPage {
 
   private initializeItems(type: number) {
     var result = [];
-    //var storage = new Storage(LocalStorage);
     
     switch (type) {
       case 1:
@@ -87,7 +99,7 @@ export class PalestrantesPage {
           });        
         }
 
-        //storage.set('palestrantes', result);
+        this.storage.setJson('palestrantes', result);
         this.items = result;
         break;
       case 2:
@@ -102,7 +114,7 @@ export class PalestrantesPage {
           });        
         }
 
-        //storage.set('palestras', result);
+        this.storage.setJson('palestras', result);
         this.itemsPalestra = result;
         break;
       case 3:
@@ -115,7 +127,7 @@ export class PalestrantesPage {
           });        
         }
 
-        //storage.set('trilhas', result);
+        this.storage.setJson('trilhas', result);
         this.itemsTrilha = result;
         tabsFunction.createTabs('ul.tabs');
 
@@ -125,21 +137,23 @@ export class PalestrantesPage {
           result.push({
             key: item,
             deviceID: this.dataAgendamento[item].deviceID,
-            palestraID: this.dataAgendamento[item].palestraID
+            palestraID: this.dataAgendamento[item].palestraID //palestranteID
           });        
         }
 
-        //storage.set('agendamentos', result);
+        this.storage.setJson('agendamentos', result);
         this.itemsAgendamento = result;
         break;
     }
     
   }
 
-  public getItems(ev: any) {    
+  public getItems(ev: any) {  
+    this.favoriteFilterSelected = false;  
     this.initializeItems(1);
     this.initializeItems(2);
     this.initializeItems(3);
+    this.initializeItems(4);
     let val = ev.target.value;
 
     if (val && val.trim() != '') {
@@ -148,6 +162,29 @@ export class PalestrantesPage {
                   (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1) ||
                     (item.ocupacao.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
+    }
+  }
+
+  public toggleFilterFavorite() {
+    if (this.favoriteFilterSelected) {
+      this.favoriteFilterSelected = false;
+      this.initializeItems(1);
+      this.initializeItems(2);
+      this.initializeItems(3);
+      this.initializeItems(4);
+    } else {      
+      let _items: Array<any> = this.items;      
+      
+      this.favoriteFilterSelected = true;
+      this.items = [];
+
+      for (var i in this.itemsAgendamento) {
+        for (var j in _items) {
+          if (this.itemsAgendamento[i].palestraID == _items[j].key) {
+            this.items.push(_items[j]);
+          }
+        }
+      }
     }
   }
 

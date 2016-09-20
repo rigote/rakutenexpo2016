@@ -176,6 +176,7 @@ ion-searchbar{
         li{
             border-bottom: 1px solid #CCC;
             margin-bottom: 15px;
+            padding-top: 5px;
             padding-bottom: 15px;
             display: inline-block;
             width: 100%;
@@ -184,6 +185,7 @@ ion-searchbar{
                 float: left;
                 margin: 0;
                 padding: 0;
+                padding-bottom:10px;
                 line-height: 24px;
                 color: #000;
                 font-weight: normal;
@@ -303,7 +305,7 @@ ion-searchbar{
     }
 }
 
-.card .card-content .infoPalestrante i.small.material-icons.active {
+.card .card-content .infoPalestrante i.small.material-icons.active, .material-icons.search.star.active {
     color: #FFD600;
 }
 

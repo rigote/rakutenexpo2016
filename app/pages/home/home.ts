@@ -16,13 +16,15 @@ export class HomePage {
   };
   public data: any;
   public _fire: Fire;
+  public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
     var root = this;
     this._fire = fire;
 
-    //var storage = new Storage(LocalStorage);
-    //this.item = storage.get('home') != null ? storage.get('home') : this.item;
+    this.storage.get('home').then((value) => {
+      root.item = JSON.parse(value);
+    });
 
     this._fire.connection.on("value", function(snap) {
         if (snap.val() === true) {
@@ -39,8 +41,7 @@ export class HomePage {
   }
 
   private initializeItems() {
-    //var storage = new Storage(LocalStorage);
-    //storage.set('home', this.data);
+    this.storage.setJson('home', this.data);
 
     this.item = this.data;
   }
