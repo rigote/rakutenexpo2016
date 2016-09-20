@@ -247,12 +247,14 @@ ion-searchbar{
                     font-size: 16.5px;
                     color: #000;
                     display: block;
-                    white-space: nowrap;
+                    //white-space: nowrap;
                     text-overflow: ellipsis;
                     overflow: hidden;
+                    max-height: 97px;
                     &.tituloPalestrante{
                         width: 55%;
-                        font-size: 14px;
+                        font-size: 11px;
+                        line-height: 19px;
                     }
                     &.canal{
                         position: absolute;
@@ -302,6 +304,7 @@ ion-searchbar{
             text-align: center;
         }
         .map {
+            background: url("../img/bg-map.png") center;
             position: relative;
             padding-bottom: 75%; // This is the aspect ratio
             height: 0;
