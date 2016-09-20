@@ -42,17 +42,17 @@ export class AgendaPage {
       root.itemsPalestrante = JSON.parse(value);
     });
 
-    this._fire.getAllPalestras().on('value', (data) => {
+    this._fire.getAllPalestras().once('value', (data) => {
       root.dataPalestra = data.val();
       root.initializeItems(1);
     });
 
-    this._fire.getAllPalestrantes().on('value', (data) => {
+    this._fire.getAllPalestrantes().once('value', (data) => {
       root.dataPalestrante = data.val();
       root.initializeItems(2);
     });
 
-    this._fire.getAllTrilhas().on('value', (data) => {
+    this._fire.getAllTrilhas().once('value', (data) => {
       root.dataTrilha = data.val();
       root.initializeItems(3);
     });
@@ -71,8 +71,7 @@ export class AgendaPage {
             descricao: this.dataPalestra[item].descricao,
             horario: this.dataPalestra[item].horario,
             trilhaID: this.dataPalestra[item].trilhaID,
-            palestranteIDs: this.dataPalestra[item].palestranteIDs,
-            agendado: false //TODO: Verificar nos agendamentos do usuário se esta palestra está agendada
+            palestranteIDs: this.dataPalestra[item].palestranteIDs
           });        
         }
 

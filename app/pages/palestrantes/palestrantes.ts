@@ -106,6 +106,7 @@ export class PalestrantesPage {
         for (var item in this.dataPalestra) {        
           result.push({
             key: item,
+            index: this.dataPalestra[item].index,
             titulo: this.dataPalestra[item].titulo,
             descricao: this.dataPalestra[item].descricao,
             horario: this.dataPalestra[item].horario,

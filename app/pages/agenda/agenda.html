@@ -19,6 +19,7 @@
           <div class="chip {{getAliasTrilha(data.trilhaID)}}" *ngIf="data.trilhaID != ''">
             <img [src]="getFotoPalestrantes(data.palestrantes)" alt="Contact Person">
             <span>{{getPalestrantesLabel(data.palestrantes)}}</span>
+            <span class="badge {{getAliasTrilha(data.trilhaID)}}">{{getAliasTrilha(data.trilhaID)}}</span>
             <span class="canal"><i class="small material-icons">radio</i> {{getCanalTrilha(data.trilhaID)}}</span>
             <span>{{data.titulo}}</span>
           </div>
