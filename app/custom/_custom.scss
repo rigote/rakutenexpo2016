@@ -357,6 +357,9 @@ ion-searchbar{
         }
         img {
             width: 40%;
+            display: inline-block;
+            margin: 10px;
+            vertical-align: -webkit-baseline-middle;
         }
     }
 }
