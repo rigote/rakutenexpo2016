@@ -22,9 +22,10 @@ export class HomePage {
     var root = this;
     this._fire = fire;
 
-    this.storage.get('home').then((value) => {
-      root.item = JSON.parse(value);
-    });
+    // this.storage.get('home').then((value) => {
+    //   if (value != null)
+    //     root.item = JSON.parse(value);
+    // });
 
     this._fire.connection.on("value", function(snap) {
         if (snap.val() === true) {
@@ -41,7 +42,7 @@ export class HomePage {
   }
 
   private initializeItems() {
-    this.storage.setJson('home', this.data);
+    //this.storage.setJson('home', this.data);
 
     this.item = this.data;
   }

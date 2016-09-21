@@ -39,21 +39,25 @@ export class PalestrantesPage {
     this._fire = fire;
     this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
 
-    this.storage.get('palestrantes').then((value) => {
-      root.items = JSON.parse(value);
-    });
+    // this.storage.get('palestrantes').then((value) => {
+    //   if (value != null)
+    //     root.items = JSON.parse(value);
+    // });
 
-    this.storage.get('palestras').then((value) => {
-      root.itemsPalestra = JSON.parse(value);
-    });
+    // this.storage.get('palestras').then((value) => {
+    //   if (value != null)
+    //     root.itemsPalestra = JSON.parse(value);
+    // });
 
-    this.storage.get('trilhas').then((value) => {
-      root.itemsTrilha = JSON.parse(value);
-    });
+    // this.storage.get('trilhas').then((value) => {
+    //   if (value != null)
+    //     root.itemsTrilha = JSON.parse(value);
+    // });
 
-    this.storage.get('agendamentos').then((value) => {
-      root.itemsAgendamento = JSON.parse(value);
-    });
+    // this.storage.get('agendamentos').then((value) => {
+    //   if (value != null)
+    //     root.itemsAgendamento = JSON.parse(value);
+    // });
 
     this._fire.getAllPalestrantes().on('value', (data) => {
       root.data = data.val();
@@ -91,7 +95,7 @@ export class PalestrantesPage {
           });        
         }
 
-        this.storage.setJson('palestrantes', result);
+        //this.storage.setJson('palestrantes', result);
         this.items = result;
         break;
       case 2:
@@ -107,7 +111,7 @@ export class PalestrantesPage {
           });        
         }
 
-        this.storage.setJson('palestras', result);
+        //this.storage.setJson('palestras', result);
         this.itemsPalestra = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         break;
       case 3:
@@ -120,7 +124,7 @@ export class PalestrantesPage {
           });        
         }
 
-        this.storage.setJson('trilhas', result);
+        //this.storage.setJson('trilhas', result);
         this.itemsTrilha = result;
         tabsFunction.createTabs('ul.tabs');
 
@@ -134,7 +138,7 @@ export class PalestrantesPage {
           });        
         }
 
-        this.storage.setJson('agendamentos', result);
+        //this.storage.setJson('agendamentos', result);
         this.itemsAgendamento = result;
         break;
     }

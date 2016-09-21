@@ -30,9 +30,10 @@ export class NotificacoesPage {
     var root = this;
     this._fire = fire;
 
-    this.storage.get('patrocinadores').then((value) => {
-      root.items = JSON.parse(value);
-    });
+    // this.storage.get('patrocinadores').then((value) => {
+    //   if (value != null)
+    //     root.items = JSON.parse(value);
+    // });
 
     this._fire.getAllPatrocinadores().once('value', (data) => {
       root.data = data.val();
@@ -52,7 +53,7 @@ export class NotificacoesPage {
       });        
     }
 
-    this.storage.setJson('patrocinadores', result);
+    //this.storage.setJson('patrocinadores', result);
 
     this.items = result;
 

@@ -30,17 +30,20 @@ export class AgendaPage {
     var root = this;
     this._fire = fire;
 
-    this.storage.get('palestras').then((value) => {
-      root.itemsPalestra = JSON.parse(value);
-    });
+    // this.storage.get('palestras').then((value) => {
+    //   if (value != null)
+    //     root.itemsPalestra = JSON.parse(value);
+    // });
     
-    this.storage.get('trilhas').then((value) => {
-      root.itemsTrilha = JSON.parse(value);
-    });
+    // this.storage.get('trilhas').then((value) => {
+    //   if (value != null)
+    //     root.itemsTrilha = JSON.parse(value);
+    // });
 
-    this.storage.get('palestrantes').then((value) => {
-      root.itemsPalestrante = JSON.parse(value);
-    });
+    // this.storage.get('palestrantes').then((value) => {
+    //   if (value != null)
+    //     root.itemsPalestrante = JSON.parse(value);
+    // });
 
     this._fire.getAllPalestras().once('value', (data) => {
       root.dataPalestra = data.val();
@@ -75,7 +78,7 @@ export class AgendaPage {
           });        
         }
 
-        this.storage.setJson('palestras', result);
+        //this.storage.setJson('palestras', result);
         this.itemsPalestra = _.sortBy(result, function(obj){ return Math.min(obj.index); });
       break;
       case 2:
@@ -89,7 +92,7 @@ export class AgendaPage {
           });        
         }
 
-        this.storage.setJson('palestrantes', result);
+        //this.storage.setJson('palestrantes', result);
         this.itemsPalestrante = result;
       break;
       case 3:
@@ -102,7 +105,7 @@ export class AgendaPage {
           });        
         }
 
-        this.storage.setJson('trilhas', result);
+        //this.storage.setJson('trilhas', result);
         this.itemsTrilha = result;
       break;
     }    
