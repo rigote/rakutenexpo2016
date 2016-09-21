@@ -19,11 +19,11 @@ export class NotificacoesPage {
   public data: any;
   public _fire: Fire;
 
-  public _gold: Array<any>;
-  public _silver: Array<any>;
-  public _bronze: Array<any>;
-  public _diamond: Array<any>;
-  public _apoio: Array<any>;
+  public _gold: Array<any> = [];
+  public _silver: Array<any> = [];
+  public _bronze: Array<any> = [];
+  public _diamond: Array<any> = [];
+  public _apoio: Array<any> = [];
   public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
