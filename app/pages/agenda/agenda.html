@@ -18,7 +18,7 @@
           <h3 *ngIf="data.trilhaID != '' && index == 0"><i class="material-icons">query_builder</i> {{item}}</h3>
           <div class="chip {{getTrilhaData(data.trilhaID,2)}}" *ngIf="data.trilhaID != ''">
             <img src="{{getFotoPalestrantes(data.palestrantes)}}" alt="{{getPalestrantesLabel(data.palestrantes)}}" />
-            <span>{{getPalestrantesLabel(data.palestrantes)}}</span>
+            <span class="agNomePalestrante">{{getPalestrantesLabel(data.palestrantes)}}</span>
             <span class="badge {{getTrilhaData(data.trilhaID,2)}}">{{getTrilhaData(data.trilhaID,3)}}</span>
             <span class="canal"><i class="small material-icons">radio</i> {{getTrilhaData(data.trilhaID,1)}}</span>
             <span class="tituloPalestrante">{{data.titulo}}</span>
