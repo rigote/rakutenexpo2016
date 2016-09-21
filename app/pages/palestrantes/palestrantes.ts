@@ -55,22 +55,22 @@ export class PalestrantesPage {
       root.itemsAgendamento = JSON.parse(value);
     });
 
-    this._fire.getAllPalestrantes().once('value', (data) => {
+    this._fire.getAllPalestrantes().on('value', (data) => {
       root.data = data.val();
       root.initializeItems(1);
     });
 
-    this._fire.getAllPalestras().once('value', (data) => {
+    this._fire.getAllPalestras().on('value', (data) => {
       root.dataPalestra = data.val();
       root.initializeItems(2);
     });
 
-    this._fire.getAllTrilhas().once('value', (data) => {
+    this._fire.getAllTrilhas().on('value', (data) => {
       root.dataTrilha = data.val();
       root.initializeItems(3);
     });
 
-    this._fire.getAgendamentoByUUID(root._uuID).once('value', (data) => {
+    this._fire.getAgendamentoByUUID(root._uuID).on('value', (data) => {
       root.dataAgendamento = data.val();
       root.initializeItems(4);
     });
