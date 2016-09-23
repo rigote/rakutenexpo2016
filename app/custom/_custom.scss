@@ -91,6 +91,13 @@ ion-navbar.toolbar{
     .destaque{
         text-align: center;
     }
+    .inscricao{
+        text-align: center;
+        margin-top: 15px;
+        a{
+            background-color: color($colors, rakuten); 
+        }
+    }
 }
 
 //Página de palestrantes
