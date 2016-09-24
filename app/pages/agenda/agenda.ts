@@ -30,6 +30,11 @@ export class AgendaPage {
     var root = this;
     this._fire = fire;
 
+    //Carregar loading
+    setTimeout(function() {
+        $('#overlayA').addClass('loaded');      
+    }, 2000);
+
     // this.storage.get('palestras').then((value) => {
     //   if (value != null)
     //     root.itemsPalestra = JSON.parse(value);

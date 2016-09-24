@@ -22,6 +22,11 @@ export class HomePage {
     var root = this;
     this._fire = fire;
 
+    //Carregar loading
+    setTimeout(function() {
+        $('#overlayE').addClass('loaded');      
+    }, 2000);
+    
     // this.storage.get('home').then((value) => {
     //   if (value != null)
     //     root.item = JSON.parse(value);

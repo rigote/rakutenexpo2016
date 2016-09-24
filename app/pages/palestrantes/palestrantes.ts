@@ -39,6 +39,11 @@ export class PalestrantesPage {
     this._fire = fire;
     this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
 
+    //Carregar loading
+    setTimeout(function() {
+        $('#overlayD').addClass('loaded');      
+    }, 2000);
+
     // this.storage.get('palestrantes').then((value) => {
     //   if (value != null)
     //     root.items = JSON.parse(value);

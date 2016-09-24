@@ -14,6 +14,11 @@ export class ComoChegarPage {
 
   constructor(private navCtrl: NavController) {
 
+    //Carregar loading
+    setTimeout(function() {
+        $('#overlayB').addClass('loaded');      
+    }, 2000);
+
   }
 
 }

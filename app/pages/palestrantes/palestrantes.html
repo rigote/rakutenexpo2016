@@ -13,6 +13,22 @@
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
+  <div id="overlayD">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-red-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row guias">
     <div class="col s12">
       <ul class="tabs">

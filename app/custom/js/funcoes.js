@@ -14,3 +14,5 @@ var tabsFunction = {
         $('div.tabContent[id!="' + selector + '"]').hide(0);
     }
 };
+
+ 

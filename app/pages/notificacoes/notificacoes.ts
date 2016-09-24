@@ -30,6 +30,11 @@ export class NotificacoesPage {
     var root = this;
     this._fire = fire;
 
+    //Carregar loading
+    setTimeout(function() {
+        $('#overlayC').addClass('loaded');      
+    }, 2000);
+
     // this.storage.get('patrocinadores').then((value) => {
     //   if (value != null)
     //     root.items = JSON.parse(value);
