@@ -29,12 +29,35 @@
 
   <div class="como-chegar">
     <div class="local">
-      <h3>Golden Hall WTC</h3>
-      <img src="build/img/wtc.jpg" alt="">
+      <ion-card>
+        <img src="build/img/wtc.jpg" alt="">     
+        <ion-card-content>
+          <h2 class="card-title">
+            Golden Hall WTC
+          </h2>
+          <p>
+            Av. das Nações Unidas, 12555<br />
+            São Paulo - SP
+          </p>
+        </ion-card-content>
+        <ion-row no-padding="">
+          <ion-col text-right="">
+            <button (click)="openMap()" clear="" danger="" small="" class="disable-hover button button-clear button-small button-clear-danger button-icon-left" ng-reflect-small="" ng-reflect-clear="">
+              <span class="button-inner">
+              <ion-icon name="pin" role="img" class="ion-ios-pin" aria-label="pin" ng-reflect-name="pin"></ion-icon>
+                Localização
+              </span>
+              <ion-button-effect></ion-button-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+      <!--<img src="build/img/wtc.jpg" alt="">
       <div class="map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7311.7502857609115!2d-46.70325883489707!3d-23.60881038997947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce50ccdf080ca9%3A0xd57f80956b7cf42a!2sAv.+das+Na%C3%A7%C3%B5es+Unidas%2C+12555+-+Cidade+Mon%C3%A7%C3%B5es%2C+S%C3%A3o+Paulo+-+SP%2C+04576-090!5e0!3m2!1spt-BR!2sbr!4v1473886480642"
           width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-      </div>
+      </div>-->
     </div>
 
     <div class="hoteis">

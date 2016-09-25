@@ -33,12 +33,12 @@
     <div class="col s12">
       <ul class="tabs">
         <li class="tab col s3 {{trilha.alias}}" *ngFor="let trilha of itemsTrilha; let last = last; let i = index">
-          <a [ngClass]="{'active': i == 0}" (click)="hide(trilha.alias)" href="#{{trilha.alias}}">{{trilha.nome}}</a>          
+          <a [ngClass]="{'active': tabs[i] == true}" (click)="selectTab(trilha.key)" href="#{{trilha.alias}}">{{trilha.nome}}</a>          
         </li>
       </ul>
     </div>
     <div id="{{trilha.alias}}" class="col s12 tabContent" *ngFor="let trilha of itemsTrilha; let last = last; let i = index">
-      <div class="card" *ngFor="let item of getPalestrantes(trilha.key)">
+      <div class="card" [hidden]="tabs[i] == false" *ngFor="let item of getPalestrantes(trilha.key)">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="{{item.foto}}">
         </div>

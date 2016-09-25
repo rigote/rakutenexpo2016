@@ -31,6 +31,7 @@ export class PalestrantesPage {
   public _fire: Fire;
   private _uuID: any;
   public favoriteFilterSelected: boolean = false;
+  public tabs: Array<boolean> = [];
   public storage: Storage = new Storage(LocalStorage);
 
   constructor(private navCtrl: NavController, private fire: Fire) {
@@ -86,7 +87,7 @@ export class PalestrantesPage {
   }
 
   private initializeItems(type: number) {
-    var result = [];
+    var result = [];    
     
     switch (type) {
       case 1:
@@ -120,18 +121,25 @@ export class PalestrantesPage {
         this.itemsPalestra = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         break;
       case 3:
-        for (var item in this.dataTrilha) {        
+        let i:number = 0;
+        this.tabs = [];
+
+        for (var item in this.dataTrilha) {
+          this.tabs.push(i == 0);
+                 
           result.push({
             key: item,
             canal: this.dataTrilha[item].canal,
             nome: this.dataTrilha[item].nome,
             alias: this.dataTrilha[item].alias
-          });        
+          });   
+
+          i++;     
         }
 
         //this.storage.setJson('trilhas', result);
         this.itemsTrilha = result;
-        tabsFunction.createTabs('ul.tabs');
+        //tabsFunction.createTabs('ul.tabs');
 
         break;
       case 4:
@@ -318,8 +326,19 @@ export class PalestrantesPage {
     return result;
   }
 
-  public hide(alias) {
-    tabsFunction.hide(alias);
+  public selectTab(key) {
+    //tabsFunction.hide(alias);
+    
+    for (let i:number = 0; i < this.itemsTrilha.length; i++) {
+      if (this.itemsTrilha[i].key == key) {
+        this.tabs[i] = true;
+      }
+      else {
+        this.tabs[i] = false;
+      }
+    }
+
+    return false;
   }
 
   ionViewLoaded() {    
