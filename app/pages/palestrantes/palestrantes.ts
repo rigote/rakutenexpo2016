@@ -97,12 +97,13 @@ export class PalestrantesPage {
             nome: this.data[item].nome,
             ocupacao: this.data[item].ocupacao,
             descricao: this.data[item].descricao,
-            foto: this.data[item].foto
+            foto: this.data[item].foto,
+            index: this.data[item].index
           });        
         }
 
         //this.storage.setJson('palestrantes', result);
-        this.items = result;
+        this.items = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         break;
       case 2:
         for (var item in this.dataPalestra) {        

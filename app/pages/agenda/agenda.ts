@@ -93,7 +93,8 @@ export class AgendaPage {
             descricao: this.dataPalestrante[item].descricao,
             foto: this.dataPalestrante[item].foto,
             nome: this.dataPalestrante[item].nome,
-            ocupacao: this.dataPalestrante[item].ocupacao
+            ocupacao: this.dataPalestrante[item].ocupacao,
+            index: this.dataPalestrante[item].index
           });        
         }
 

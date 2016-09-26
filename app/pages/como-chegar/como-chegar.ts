@@ -25,22 +25,13 @@ export class ComoChegarPage {
   }
 
   public openMap() {    
-    launchnavigator.isAppAvailable(launchnavigator.APP.UBER, function(isAvailable){
-      var app;
-      if(isAvailable){
-          app = launchnavigator.APP.UBER;
-      }else{
-          console.warn("Google Maps not available - falling back to user selection");
-          app = launchnavigator.APP.USER_SELECT;
-      }
-      LaunchNavigator.navigate([-23.6089975, -46.6991569], {
-        app: app
+    LaunchNavigator.navigate([-23.6089975, -46.6991569], {
+        app: launchnavigator.APP.USER_SELECT
       })
       .then(
         success => console.log('Launched navigator'),
         error => console.log('Error launching navigator', error)
       );
-    });
   }
 
 }
