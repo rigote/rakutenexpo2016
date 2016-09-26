@@ -33,6 +33,10 @@
     <div class="content" [innerHTML]="item.sobre">
     </div>
 
+    <div class="row inscricao">
+      <a class="waves-effect waves-light btn" href="http://automacaodeeventos.com.br/rakuten/sis/inscricao/index.asp" target="blank"><i class="material-icons left">mode_edit</i>Inscreva-se</a>
+    </div>
+
     <div class="row box">
       <div class="dados">
         <strong>DATA</strong>
@@ -45,17 +49,14 @@
       <div class="dados">
         <strong>Senha Wi-Fi</strong>
         <ul>
-          <li><i class="material-icons">speaker_phone</i> {{item.senha}}</li>
+          <li>ID Wi-Fi: {{item.ssid}}</li>
+          <li><i class="material-icons">speaker_phone</i> <span class="textSelect">{{item.senha}}</span></li>
         </ul>
       </div>
     </div>
 
     <div class="destaque">
       <img src="build/img/amorim.jpg" alt="">
-    </div>
-
-    <div class="row inscricao">
-      <a class="waves-effect waves-light btn" href="http://automacaodeeventos.com.br/rakuten/sis/inscricao/index.asp" target="blank"><i class="material-icons left">mode_edit</i>Inscreva-se</a>
     </div>
 
   </div>

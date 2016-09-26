@@ -12,7 +12,8 @@ export class HomePage {
   public item: any = {
     sobreimagem: '',
     sobre: '',
-    senha: ''
+    senha: '',
+    ssid: ''
   };
   public data: any;
   public _fire: Fire;
